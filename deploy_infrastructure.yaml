@@ -1,0 +1,17 @@
+steps:
+- id: "Deploy infrastructure through Terraform"
+  name: "hashicorp/terraform:light"
+  entrypoint: "/bin/sh"
+  args:
+  - -c
+  - |
+  sh ./infrastructure/terraform-util.sh get
+  sh ./infrastructure/terraform-util.sh init
+  sh ./infrastructure/terraform-util.sh validate
+  sh ./infrastructure/terraform-util.sh plan
+  # sh ./infrastructure/terraform-util.sh apply
+  env:
+  - 'ENV=$_ENV'
+  - 'PROJECT=$PROJECT_ID'
+substitutions:
+    "_ENV": "DEV"
