@@ -10,6 +10,7 @@ steps:
   sh ./infrastructure/terraform-util.sh validate
   sh ./infrastructure/terraform-util.sh plan
   # sh ./infrastructure/terraform-util.sh apply
+
   env:
   - 'ENV=$_ENV'
   - 'PROJECT=$PROJECT_ID'
