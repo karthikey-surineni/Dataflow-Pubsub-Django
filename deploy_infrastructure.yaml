@@ -1,6 +1,6 @@
 steps:
 - id: "Deploy infrastructure through Terraform"
-  name: "hashicorp/terraform:light"
+  name: "hashicorp/terraform:0.12.24"
   entrypoint: "/bin/sh"
   args:
   - -c
@@ -10,7 +10,6 @@ steps:
   sh ./infrastructure/terraform-util.sh validate;
   sh ./infrastructure/terraform-util.sh plan;
   # sh ./infrastructure/terraform-util.sh apply
-
   env:
   - 'ENV=$_ENV'
   - 'PROJECT=$PROJECT_ID'
