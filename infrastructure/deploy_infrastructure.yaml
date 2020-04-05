@@ -13,7 +13,7 @@ steps:
 - id: "Deploy infrastructure through Terraform"
   name: "hashicorp/terraform:0.12.24"
   entrypoint: "/bin/sh"
-  waitfor: "Deploy/Check for Backend"
+  waitFor: "Deploy/Check for Backend"
   args:
   - -c
   - |
