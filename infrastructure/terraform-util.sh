@@ -1,6 +1,4 @@
 #!/bin/bash
-# PROJECT=$(gcloud config get-value project)
-# ENV="dev"
 BACKEND_BUCKET="${PROJECT}-backend"
 PLAN="${PROJECT}-${ENV}.out"
 
@@ -16,8 +14,8 @@ init(){
     -backend-config=bucket="${BACKEND_BUCKET}" \
     -reconfigure -get=false;
     terraform workspace new "${ENV}";
-    terraform workspace select "${ENV}"}
-
+    terraform workspace select "${ENV}"
+}
 plan(){
     terraform plan \
         -out ${PLAN}
