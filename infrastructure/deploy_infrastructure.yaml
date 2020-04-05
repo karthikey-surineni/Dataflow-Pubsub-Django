@@ -1,7 +1,19 @@
 steps:
+- id: "Deploy/Check for Backend"
+  name: "gcr.io/cloud-builders/gcloud"
+  entrypoint: "/bin/sh"
+  args:
+  - -c
+  - |
+    sh ./infrastructure/deploy_backend.sh;
+  env:
+  - 'ENV=$_ENV'
+  - 'PROJECT=$PROJECT_ID'
+
 - id: "Deploy infrastructure through Terraform"
   name: "hashicorp/terraform:0.12.24"
   entrypoint: "/bin/sh"
+  waitfor: "Deploy/Check for Backend"
   args:
   - -c
   - |
