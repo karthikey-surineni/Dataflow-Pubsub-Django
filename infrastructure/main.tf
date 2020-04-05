@@ -9,7 +9,7 @@ module "bigquery" {
     dataset_id = "DPD_Test"
     friendly_name = "Dataflow Pubsub Django Test"
     description = "Test dataset"
-    location = local.location
+    location = local.region
     env = terraform.workspace
     partition_config = local.partition_config
 }
