@@ -5,7 +5,7 @@ steps:
   args:
   - -c
   - |
-    sh ./infrastructure/deploy_backend.sh;
+    sh ./infrastructure/deploy_backend.sh
   env:
   - 'ENV=$_ENV'
   - 'PROJECT=$PROJECT_ID'
