@@ -9,7 +9,7 @@ steps:
   env:
   - 'ENV=$_ENV'
   - 'PROJECT=$PROJECT_ID'
-- id: "Deploy infrastructure through Terraform"
+- id: "Plan infrastructure through Terraform"
   name: "hashicorp/terraform:0.12.24"
   waitFor:
   - "Deploy/Check for Backend"
