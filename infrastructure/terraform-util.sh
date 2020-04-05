@@ -7,8 +7,6 @@ PLAN="${PROJECT}-${ENV}.out"
 echo $BACKEND_BUCKET
 echo $PLAN
 
-cd ./infrastructure
-
 # Helper functions
 check_backend_exists(){
 for item in $(gsutil ls)
