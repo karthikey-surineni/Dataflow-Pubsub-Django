@@ -1,7 +1,7 @@
 resource "google_bigquery_table" "datatable" {
   for_each = toset(var.table_list)
   dataset_id = google_bigquery_dataset.dataset.dataset_id
-  table_id   = var.table_id
+  table_id   = each.key
 
   time_partitioning {
     type = "DAY"
