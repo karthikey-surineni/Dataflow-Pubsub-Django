@@ -3,7 +3,6 @@ locals {
   partition_config = {"ATest"="InsertTimestamp","BTest"="InsertTimestamp"}
 }
 
-
 module "bigquery" {
     source = "./infrastructure/modules/bigquery"
     table_list = local.test_tables

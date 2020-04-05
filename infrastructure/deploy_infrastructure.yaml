@@ -17,11 +17,12 @@ steps:
   args:
   - -c
   - |
-    sh ./infrastructure/terraform-util.sh get;
-    sh ./infrastructure/terraform-util.sh init;
-    sh ./infrastructure/terraform-util.sh validate;
-    sh ./infrastructure/terraform-util.sh plan;
-  # sh ./infrastructure/terraform-util.sh apply
+    cd ./infrastructure
+    sh ./terraform-util.sh get;
+    sh ./terraform-util.sh init;
+    sh ./terraform-util.sh validate;
+    sh ./terraform-util.sh plan;
+  # sh ./terraform-util.sh apply
   env:
   - 'ENV=$_ENV'
   - 'PROJECT=$PROJECT_ID'
