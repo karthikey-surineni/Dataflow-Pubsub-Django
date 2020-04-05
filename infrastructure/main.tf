@@ -4,7 +4,7 @@ locals {
 }
 
 module "bigquery" {
-    source = "./infrastructure/modules/bigquery"
+    source = "./modules/bigquery"
     table_list = local.test_tables
     dataset_id = "DPD_Test"
     friendly_name = "Dataflow Pubsub Django Test"
