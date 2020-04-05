@@ -22,7 +22,7 @@ steps:
     sh ./terraform-util.sh init;
     sh ./terraform-util.sh validate;
     sh ./terraform-util.sh plan;
-    sh ./terraform-util.sh apply
+  # sh ./terraform-util.sh apply
   env:
   - 'ENV=$_ENV'
   - 'PROJECT=$PROJECT_ID'

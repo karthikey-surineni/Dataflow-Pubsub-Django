@@ -2,11 +2,11 @@
 BACKEND_BUCKET="${PROJECT}-backend"
 PLAN="${PROJECT}-${ENV}.out"
 
+# Helper functions
 create_backend(){
     $(gsutil mb -c standard -l australia-southeast1 gs://${BACKEND_BUCKET})
 }
 
-# Helper functions
 check_backend_exists(){
 for item in $(gsutil ls)
 do
@@ -14,7 +14,6 @@ do
         found=1
     fi
 done
-
 }
 
 check_backend_exists
