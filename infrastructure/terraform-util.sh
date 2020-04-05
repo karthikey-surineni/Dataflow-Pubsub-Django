@@ -5,6 +5,9 @@ BACKEND_BUCKET="${PROJECT}-backend"
 PLAN="${PROJECT}-${ENV}.out"
 
 echo $BACKEND_BUCKET
+echo $PLAN
+
+cd ./infrastructure
 
 # Helper functions
 check_backend_exists(){
