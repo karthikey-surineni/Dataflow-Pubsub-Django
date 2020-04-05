@@ -14,7 +14,7 @@ variable "env" {
   type = string
 }
 variable "table_list" {
-  type = string
+  type = list
   default = []
 }
 variable "partition_config" {
