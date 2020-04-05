@@ -1,4 +1,4 @@
-resource "google_bigquery_table" "default" {
+resource "google_bigquery_table" "datatable" {
   for_each = toset(var.table_list)
   dataset_id = google_bigquery_dataset.default.dataset_id
   table_id   = var.table_id
@@ -12,4 +12,5 @@ resource "google_bigquery_table" "default" {
     env = var.env
 
   schema = file("${path.cwd}/schema/${each.key}.json")
+}
 }
