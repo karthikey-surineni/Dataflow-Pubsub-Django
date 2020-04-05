@@ -11,6 +11,6 @@ resource "google_bigquery_table" "datatable" {
   labels = {
     env = var.env
 
-  schema = file("${path.cwd}/schema/${each.key}.json")
+  schema = file("${path.cwd}/modules/bigquery/schema/${each.key}.json")
 }
 }
