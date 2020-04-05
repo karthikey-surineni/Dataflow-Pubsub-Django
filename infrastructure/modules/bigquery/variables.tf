@@ -1,26 +1,27 @@
 variable "dataset_id" {
-  type = "string"
+  type = string
 }
 variable "friendly_name" {
-  type = "string"
+  type = string
 }
 variable "description" {
-  type = "string"
+  type = string
 }
 variable "location" {
-  type = "string"
+  type = string
 }
 variable "env" {
-  type = "string"
+  type = string
 }
 variable "table_list" {
-  type = "list"
+  type = string
   default = []
 }
 variable "partition_config" {
-  type = "map"
+  type = map
   default = {}
 }
 variable "default_partition_field" {
-   default = "InsertTimestamp"
+  type = string
+  default = "InsertTimestamp"
 }
