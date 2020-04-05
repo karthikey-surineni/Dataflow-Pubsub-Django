@@ -1,5 +1,5 @@
 steps:
-- id: "Deploy/Check for Backend"
+- id: "Deploy or Check for Backend"
   name: "gcr.io/cloud-builders/gcloud"
   entrypoint: "/bin/sh"
   args:
@@ -13,7 +13,7 @@ steps:
 - id: "Deploy infrastructure through Terraform"
   name: "hashicorp/terraform:0.12.24"
   entrypoint: "/bin/sh"
-  waitFor: "Deploy/Check for Backend"
+  waitFor: "Deploy or Check for Backend"
   args:
   - -c
   - |
