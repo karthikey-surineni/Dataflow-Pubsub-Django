@@ -5,7 +5,7 @@ resource "google_bigquery_table" "datatable" {
 
   time_partitioning {
     type = "DAY"
-    field = lookup(var.partition_config,each.key,"InsertTimestamp")
+    field = lookup(var.partition_config,each.key,var.default_partition_field)
   }
 
   labels = {
