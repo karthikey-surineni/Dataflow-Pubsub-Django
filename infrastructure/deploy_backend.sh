@@ -18,4 +18,4 @@ done
 }
 
 check_backend_exists
-[ -z $found ] && create_backend; exit 0 || exit 0
+[ -z $found ] && create_backend; exit 0 || echo "${BACKEND_BUCKET} exists"; exit 0
