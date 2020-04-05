@@ -9,8 +9,7 @@ resource "google_bigquery_table" "default" {
   }
 
   labels = {
-    env = google_bigquery_dataset.default.env
-  }
+    env = var.env
 
   schema = file("${path.cwd}/schema/${each.key}.json")
 }
