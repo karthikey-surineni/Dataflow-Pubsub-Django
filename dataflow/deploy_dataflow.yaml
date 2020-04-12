@@ -1,10 +1,10 @@
 steps:
+- id: "Create dataflow job Pubsub to BigQuery"
   name: "python:3.7.4"
   entrypoint: "/bin/sh"
-  args: 
+  args:
   - -c
   - |
-    ls;
     pip install -r requirements.txt;
     python3 main.py \
             --project=dataflow-pubsub-django \
