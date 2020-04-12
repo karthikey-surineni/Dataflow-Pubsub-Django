@@ -9,5 +9,6 @@ resource "google_bigquery_table" "datatable" {
   labels = {
     env = var.env
   }
-  schema = file("${path.root}/common/schema/${each.key}.json")
+  # TODO: Need to change to common/schema
+  schema = file("${path.cwd}/modules/bigquery/schema/${each.key}.json")
 }
