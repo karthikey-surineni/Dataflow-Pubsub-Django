@@ -7,7 +7,6 @@ import apache_beam as beam
 import apache_beam.transforms.window as window
 from apache_beam.options.pipeline_options import PipelineOptions
 
-
 class GroupWindowsIntoBatches(beam.PTransform):
     """A composite transform that groups Pub/Sub messages based on publish
     time and outputs a list of dictionaries, where each contains one message
@@ -86,5 +85,5 @@ def run(input_topic, dest_table, dest_schema, window_size=1.0, pipeline_args=Non
                     dest_table,
                     schema=dest_schema,
                     create_disposition=beam.io.BigQueryDisposition.CREATE_NEVER,
-                    write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE)
+                    write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND)
         )

@@ -1,0 +1,16 @@
+steps:
+  name: "python:3.7.4"
+  entrypoint: "/bin/sh"
+  args: 
+  - -c
+  - |
+    ls;
+    pip install -r requirements.txt;
+    python3 main.py \
+            --project=dataflow-pubsub-django \
+            --input_topic=projects/dataflow-pubsub-django/topics/DPD_topic \
+            --window_size=2 \
+            --dest_table=dataflow-pubsub-django:DPD_dataset.ATest \
+            --runner=DataflowRunner \
+            --temp_location=gs://dataflow-pubsub-django-backend/dataflow/temp \
+            --staging_location=gs://dataflow-pubsub-django-backend/dataflow/staging
