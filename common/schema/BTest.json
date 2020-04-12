@@ -1,0 +1,17 @@
+[
+    {
+        "name": "BTestId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "BTestData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "InsertTimestamp",
+        "type": "TIMESTAMP",
+        "mode": "NULLABLE"
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "name": "ATestId",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "ATestData",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "InsertTimestamp",
+        "type": "TIMESTAMP",
+        "mode": "NULLABLE"
+    }
+]

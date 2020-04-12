@@ -13,7 +13,6 @@ class GroupWindowsIntoBatches(beam.PTransform):
     time and outputs a list of dictionaries, where each contains one message
     and its publish timestamp.
     """
-
     def __init__(self, window_size):
         # Convert minutes into seconds.
         self.window_size = int(window_size * 60)
@@ -53,24 +52,24 @@ class AddTimestamps(beam.DoFn):
         }
 
 
-class WriteBatchesToGCS(beam.DoFn):
-    def __init__(self, output_path):
-        self.output_path = output_path
+# class WriteBatchesToGCS(beam.DoFn):
+#     def __init__(self, output_path):
+#         self.output_path = output_path
 
-    def process(self, batch, window=beam.DoFn.WindowParam):
-        """Write one batch per file to a Google Cloud Storage bucket. """
+#     def process(self, batch, window=beam.DoFn.WindowParam):
+#         """Write one batch per file to a Google Cloud Storage bucket. """
 
-        ts_format = "%H:%M"
-        window_start = window.start.to_utc_datetime().strftime(ts_format)
-        window_end = window.end.to_utc_datetime().strftime(ts_format)
-        filename = "-".join([self.output_path, window_start, window_end])
+#         ts_format = "%H:%M"
+#         window_start = window.start.to_utc_datetime().strftime(ts_format)
+#         window_end = window.end.to_utc_datetime().strftime(ts_format)
+#         filename = "-".join([self.output_path, window_start, window_end])
 
-        with beam.io.gcp.gcsio.GcsIO().open(filename=filename, mode="w") as f:
-            for element in batch:
-                f.write("{}\n".format(json.dumps(element)).encode("utf-8"))
+#         with beam.io.gcp.gcsio.GcsIO().open(filename=filename, mode="w") as f:
+#             for element in batch:
+#                 f.write("{}\n".format(json.dumps(element)).encode("utf-8"))
 
 
-def run(input_topic, output_path, window_size=1.0, pipeline_args=None):
+def run(input_topic, dest_table, dest_schema, window_size=1.0, pipeline_args=None):
     # `save_main_session` is set to true because some DoFn's rely on
     # globally imported modules.
     pipeline_options = PipelineOptions(
@@ -83,34 +82,9 @@ def run(input_topic, output_path, window_size=1.0, pipeline_args=None):
             | "Read PubSub Messages"
             >> beam.io.ReadFromPubSub(topic=input_topic)
             | "Window into" >> GroupWindowsIntoBatches(window_size)
-            | "Write to GCS" >> beam.ParDo(WriteBatchesToGCS(output_path))
+            | "Write to BigQuery Table" >> beam.io.WriteToBigQuery(
+                    dest_table,
+                    schema=dest_schema,
+                    create_disposition=beam.io.BigQueryDisposition.CREATE_NEVER,
+                    write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE)
         )
-
-
-if __name__ == "__main__":  # noqa
-    logging.getLogger().setLevel(logging.INFO)
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--input_topic",
-        help="The Cloud Pub/Sub topic to read from.\n"
-        '"projects/<PROJECT_NAME>/topics/<TOPIC_NAME>".',
-    )
-    parser.add_argument(
-        "--window_size",
-        type=float,
-        default=1.0,
-        help="Output file's window size in number of minutes.",
-    )
-    parser.add_argument(
-        "--output_path",
-        help="GCS Path of the output file including filename prefix.",
-    )
-    known_args, pipeline_args = parser.parse_known_args()
-
-    run(
-        known_args.input_topic,
-        known_args.output_path,
-        known_args.window_size,
-        pipeline_args,
-    )
